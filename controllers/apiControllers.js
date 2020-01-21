@@ -41,7 +41,7 @@ module.exports = function (app) {
 
             res.json({"unix": date.getTime(), "utc" : date.toUTCString() });
         } else {
-            res.json({"unix": "null", "utc" : "Invalid Date" });
+            res.json({"error": "Invalid Date"});
         }
 
     });
