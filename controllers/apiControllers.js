@@ -13,7 +13,7 @@ module.exports = function (app) {
     app.get("/api/timestamp/", function (req, res) {
 
         var date = new Date();
-        res.json({ "date": date.getTime() });//UTC time in ms
+        res.json({"unix": date.getTime(), "utc" : date.toUTCString() });
 
     })
 
@@ -25,7 +25,7 @@ module.exports = function (app) {
         if (!isNaN(date_string)) {
             //if date string is a number
             var date = new Date(parseInt(date_string));
-            res.json({ "date": date.getTime() });
+            res.json({"unix": date.getTime(), "utc" : date.toUTCString() });
         }else{
 
             next();
@@ -39,9 +39,9 @@ module.exports = function (app) {
             //if string can be parsed into a valid date object
             var date = new Date(Date.parse(date_string));       
 
-            res.json({ "date": date.getTime() });
+            res.json({"unix": date.getTime(), "utc" : date.toUTCString() });
         } else {
-            res.json({ "date": "invalid" });
+            res.json({"unix": null, "utc" : "Invalid Date" });
         }
 
     });
